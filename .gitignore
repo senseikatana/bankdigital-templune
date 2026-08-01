@@ -2,7 +2,7 @@
 node_modules/
 .pnpm-store/
 .yarn/
-
+.ignore
 # Carpetas y archivos ocultos del sistema y herramientas
 .*
 !.gitignore
