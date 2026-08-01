@@ -1,15 +1,34 @@
 import { describe, it, expect } from 'bun:test';
-import React from 'react';
+import { renderToString } from 'react-dom/server';
+import { MemoryRouter } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-describe('App Component', () => {
-  it('debería renderizar correctamente', () => {
-    // Test simple para verificar que React funciona
-    expect(React).toBeDefined();
+import App from '../src/App';
+
+function renderApp(entry: string): string {
+  const queryClient = new QueryClient();
+  return renderToString(
+    <MemoryRouter initialEntries={[entry]}>
+      <QueryClientProvider client={queryClient}>
+        <App />
+      </QueryClientProvider>
+    </MemoryRouter>
+  );
+}
+
+describe('App (SSR)', () => {
+  it('renderiza la Home en "/"', () => {
+    const html = renderApp('/');
+    expect(html).toContain('banca digital');
   });
 
-  it('debería tener el nombre del proyecto', () => {
-    const projectName = 'bankdigital-templune';
-    expect(projectName).toBeDefined();
-    expect(projectName.length).toBeGreaterThan(0);
+  it('muestra el Dashboard en "/dashboard"', () => {
+    const html = renderApp('/dashboard');
+    expect(html.toLowerCase()).toContain('dashboard');
+  });
+
+  it('muestra 404 en una ruta desconocida', () => {
+    const html = renderApp('/no-existe');
+    expect(html.toLowerCase()).toContain('no encontrada');
   });
 });

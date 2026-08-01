@@ -2,7 +2,11 @@
 
 ## 🚀 Descripción
 
-Proyecto **bankdigital-templune** construido con Bun y React.
+Proyecto **bankdigital-templune** construido con **Bun** y **React 19**. Incluye un SPA cliente con **React Router DOM v7** (rutas) y **TanStack Query v5** (gestión de datos).
+
+- `bun dev` levanta el dev server SPA (`bun --hot index.html`) con HMR.
+- `bun run build` genera un sitio estático en `dist/`.
+- Las variables de entorno públicas llevan el prefijo `BUN_PUBLIC_*` (ver `bunfig.toml`).
 
 ## 📦 Instalación
 
