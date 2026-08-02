@@ -1,2 +1,2 @@
 allowBuilds:
-  bun: true
+  bun: set this to true or false
